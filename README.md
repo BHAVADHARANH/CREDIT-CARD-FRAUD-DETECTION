@@ -1,47 +1,53 @@
 # Credit Card Fraud Detection
 
 ## Project Overview
-This project aims to develop a machine learning-based classification model to detect fraudulent credit card transactions. The focus is on handling class imbalance, engineering meaningful features, and optimizing model performance to minimize false positives while ensuring high accuracy.
+This project aims to develop a classification model to detect fraudulent credit card transactions efficiently. The dataset is highly imbalanced, requiring special handling to ensure accurate fraud detection while minimizing false positives.
 
 ## Dataset
-The dataset consists of anonymized transaction data, including:
-
-- Time: The elapsed time since the first transaction  
-- Amount: The transaction amount  
-- V1 - V28: Principal components obtained from PCA to protect confidentiality  
-- Class: The target variable (0 = Legitimate, 1 = Fraudulent)  
+The dataset contains anonymized credit card transactions, including transaction time, amount, and transformed numerical features. The target variable indicates whether a transaction is fraudulent or legitimate.
 
 ## Data Preprocessing
-- Normalization: Standardization of Amount and Time for consistency  
-- Handling Imbalance: Synthetic Minority Over-sampling Technique (SMOTE) is applied to address the skewed class distribution  
-- Data Splitting: The dataset is divided into training (80 percent) and testing (20 percent) sets  
+
+1. Missing values were checked, and since none were present, no imputation was required.  
+2. The dataset had numerical features with different scales. The transaction amount and time were normalized to improve model performance.  
+3. Class imbalance was addressed using Synthetic Minority Over-sampling Technique (SMOTE) to balance fraudulent and non-fraudulent transactions.  
 
 ## Feature Engineering
-- Transaction Frequency: The number of transactions per user within a given timeframe  
-- Spending Patterns: Identification of unusual spending behavior based on transaction amounts  
-- Anomaly Detection: Analysis of deviations from normal transaction activity  
+
+1. Transaction frequency was calculated to track how often similar transactions occur.  
+2. Spending patterns were analyzed to detect deviations from normal spending behavior.  
+3. Time-based anomalies were identified to detect unusual transactions occurring outside of typical hours.  
 
 ## Model Selection
-Several classification algorithms are implemented and evaluated:
 
-- Logistic Regression  
-- Random Forest  
-- XGBoost  
+1. Logistic Regression was used as a baseline model for comparison.  
+2. Random Forest was chosen for its ability to handle imbalanced datasets effectively.  
+3. XGBoost was used due to its high performance in classification tasks.  
 
-## Evaluation Metrics
-To ensure a reliable fraud detection system, multiple performance metrics are used:
+## Model Evaluation
 
-- Accuracy: Measures overall correctness  
-- Precision: Ensures legitimate transactions are not incorrectly flagged  
-- Recall: Ensures fraudulent transactions are detected  
-- F1-Score: Balances precision and recall  
-- AUC-ROC: Evaluates the model’s ability to distinguish between legitimate and fraudulent transactions  
+1. Accuracy was considered but not relied upon due to class imbalance.  
+2. Precision was evaluated to ensure fraudulent transactions flagged by the model were truly fraudulent.  
+3. Recall was prioritized to maximize the detection of actual fraudulent cases.  
+4. F1-score was used to balance precision and recall.  
+5. AUC-ROC was analyzed to measure the model’s ability to differentiate between fraud and legitimate transactions.  
 
-## Expected Outcome
-The project aims to develop a robust fraud detection model that effectively identifies fraudulent transactions while minimizing false alarms. The final model will be selected based on the best balance of accuracy, recall, and precision.
+## Results
+
+1. Logistic Regression had high recall but very low precision, leading to many false positives.  
+2. Random Forest achieved a good balance between precision and recall.  
+3. XGBoost provided the best performance with the highest AUC-ROC and F1-score.  
+
+## Conclusion
+
+1. XGBoost was selected as the final model due to its superior fraud detection performance.  
+2. Feature engineering contributed significantly to improving model accuracy.  
+3. The model effectively detects fraudulent transactions while keeping false positives low.  
 
 ## Repository Structure
-- Data Preprocessing and Feature Engineering  
-- Model Training and Evaluation  
-- Results Analysis and Optimization  
-- Documentation and Code Submission  
+
+1. data - Contains the dataset.  
+2. notebooks - Includes exploratory data analysis and model training scripts.  
+3. src - Source code for preprocessing, training, and evaluation.  
+4. README.md - Documentation of the project.  
+
